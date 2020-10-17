@@ -55,11 +55,17 @@ O Happy é uma aplicação que conecta pessoas à casas de acolhimento instituci
 
 Describe your project -->
 
-<!-- ## :sparkles: Features ##
+## :sparkles: Requisitos novos ##
 
-:heavy_check_mark: Feature 1;\
-:heavy_check_mark: Feature 2;\
-:heavy_check_mark: Feature 3; -->
+:heavy_check_mark: Acesso restrito;
+:heavy_check_mark: Recuperação de senhas;
+:heavy_check_mark: Cadastro de orfanatos;
+:heavy_check_mark: Splash Screen no React Native com Expo;
+:heavy_check_mark: Onboarding do usuário;
+:heavy_check_mark: Localização real do usuário;
+:heavy_check_mark: Cadastro em múltiplas etapas;
+:heavy_check_mark: Logout da aplicação;
+:heavy_check_mark: Deploy da aplicação;
 
 ## 🚀 Tecnologias
 
@@ -75,8 +81,8 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 Nos links abaixo você encontra o layout do projeto web e também do mobile. Lembrando que você precisa ter uma conta no [Figma](http://figma.com/) para acessá-lo.
 
-- [Layout Web](https://www.figma.com/file/mDEbnoojksG4w8sOxmudh3/Happy-Web)
-- [Layout Mobile](https://www.figma.com/file/X27FfVxAgy9f5IFa7ONlph/Happy-Mobile)
+- [Layout Web](https://www.figma.com/file/WN1nagnfaEG6C1iiSoXx1o/Happy-Web-2.0)
+- [Layout Mobile](https://www.figma.com/file/oDw8CUcf1JXwu52Fa1fujB/Happy-Mobile-2.0)
 
 <!-- ## :white_check_mark: Requirements ## -->
 <!-- Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Node](https://nodejs.org/en/) installed. -->
