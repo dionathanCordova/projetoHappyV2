@@ -33,7 +33,6 @@ export default class CreateAuthService {
          expiresIn: '1d'
       })
 
-      return [UserView.render(user), token];
-      // return [user, token];
+      return {'user' : UserView.render(user), 'token' : token};
    }
 }

@@ -46,18 +46,15 @@ export default function OrphanageData() {
       } as any)
     })
 
-    console.log(data);
-    const respomse =  await api.post('orphanages', data);
-
-    console.log(respomse);
+    const respomse = await api.post('orphanages', data);
 
     navigation.navigate('OrphanagesMap');
   }
 
   async function handleSelectImages() {
-    const {status} = await ImagePicker.requestCameraPermissionsAsync();
+    const { status } = await ImagePicker.requestCameraPermissionsAsync();
 
-    if(status !== 'granted') {
+    if (status !== 'granted') {
       alert('Para cadastrar fotos precisamos que aceite a permissão de fotos ...');
       return;
     }
@@ -68,13 +65,13 @@ export default function OrphanageData() {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
     });
 
-    if(result.cancelled) {
+    if (result.cancelled) {
       return;
     }
 
     const { uri } = result;
 
-    setImages([ ...images, uri])
+    setImages([...images, uri])
   }
 
   return (
@@ -106,9 +103,9 @@ export default function OrphanageData() {
       <View style={styles.uploadedImagesContainer}>
         {images.map(image => {
           return (
-            <Image 
+            <Image
               key={image}
-              source={{uri: image}}
+              source={{ uri: image }}
               style={styles.uploadedImage}
             />
           )
@@ -222,7 +219,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito_800ExtraBold',
     fontSize: 16,
     color: '#FFF',
-  }, 
+  },
 
   uploadedImagesContainer: {
     flexDirection: 'row'

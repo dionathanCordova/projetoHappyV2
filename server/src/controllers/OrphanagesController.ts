@@ -29,7 +29,6 @@ export default {
 
     async create(request: Request, response: Response) {
         const { name, latitude, longitude, about, instruction, opening_hours, open_on_weekends} = request.body;
-        console.log({ name, latitude, longitude, about, instruction, opening_hours, open_on_weekends});
         const orphanagesRepository = getRepository(Orphanages);
 
         const requestImages = request.files as Express.Multer.File[];
@@ -68,7 +67,6 @@ export default {
             abortEarly: false
         })
 
-        console.log(data);
         const createOrphanages = orphanagesRepository.create(data);
 
         await orphanagesRepository.save(createOrphanages);
