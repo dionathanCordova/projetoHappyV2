@@ -28,13 +28,13 @@
   <!-- <img alt="Github stars" src="https://img.shields.io/github/stars/dionathanCordova/nlw-3?color=56BEB8" /> -->
 </p>
 
-<!-- Status -->
+Status
 
-<!-- <h4 align="center"> 
+<h4 align="center"> 
 	🚧  NLW 3 🚀 Under construction...  🚧
 </h4> 
 
-<hr> -->
+<hr>
 
 <p align="center">
   <a href="#-projeto">Projeto</a> &#xa0; | &#xa0; 
