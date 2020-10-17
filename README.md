@@ -58,7 +58,7 @@ Describe your project -->
 ## :sparkles: Requisitos novos ##
 
 <!-- :heavy_check_mark: -->
-:x: Acesso restrito\
+:heavy_check_mark: Acesso restrito\
 :x: Recuperação de senhas\
 :x: Cadastro de orfanatos\
 :x: Splash Screen no React Native com Expo\
