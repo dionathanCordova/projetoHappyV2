@@ -10,7 +10,7 @@
 
 </div>
 
-<h1 align="center">NLW 3</h1>
+<h1 align="center">NLW#3 2° versão</h1>
 
 <p align="center">
   <img alt="Github top language" src="https://img.shields.io/github/languages/top/dionathanCordova/nlw-3?color=56BEB8">
@@ -57,8 +57,8 @@ Describe your project -->
 
 ## :sparkles: Requisitos novos ##
 
-:heavy_check_mark: Acesso restrito;
-:heavy_check_mark: Recuperação de senhas;
+:heavy_check_mark: Acesso restrito;\
+:heavy_check_mark: Recuperação de senhas;z\
 :heavy_check_mark: Cadastro de orfanatos;
 :heavy_check_mark: Splash Screen no React Native com Expo;
 :heavy_check_mark: Onboarding do usuário;
