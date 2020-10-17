@@ -58,14 +58,14 @@ Describe your project -->
 ## :sparkles: Requisitos novos ##
 
 :heavy_check_mark: Acesso restrito;\
-:heavy_check_mark: Recuperação de senhas;z\
-:heavy_check_mark: Cadastro de orfanatos;
-:heavy_check_mark: Splash Screen no React Native com Expo;
-:heavy_check_mark: Onboarding do usuário;
-:heavy_check_mark: Localização real do usuário;
-:heavy_check_mark: Cadastro em múltiplas etapas;
-:heavy_check_mark: Logout da aplicação;
-:heavy_check_mark: Deploy da aplicação;
+:heavy_check_mark: Recuperação de senhas;\
+:heavy_check_mark: Cadastro de orfanatos;\
+:heavy_check_mark: Splash Screen no React Native com Expo;\
+:heavy_check_mark: Onboarding do usuário;\
+:heavy_check_mark: Localização real do usuário;\
+:heavy_check_mark: Cadastro em múltiplas etapas;\
+:heavy_check_mark: Logout da aplicação;\
+:heavy_check_mark: Deploy da aplicação;\
 
 ## 🚀 Tecnologias
 
