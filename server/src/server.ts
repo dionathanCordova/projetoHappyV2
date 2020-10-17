@@ -1,5 +1,6 @@
+import "reflect-metadata";
 import express, { request, response } from 'express';
-import path from 'path';
+import path from "path";
 import cors from 'cors';
 import 'express-async-errors';
 

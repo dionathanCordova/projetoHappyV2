@@ -1,0 +1,20 @@
+import { Request, Response } from 'express';
+
+import CreateAuthService from '../services/CreateAuthService';
+
+export default class AuthController {
+   public async create(request: Request, response: Response): Promise<Response> {
+      try {
+         const { email, password } = request.body;
+
+         const authService = new CreateAuthService();
+
+         const user = await authService.execute({email, password});
+
+         return response.json(user);
+
+      } catch (error) {
+         return response.status(403).json({message: error.message})
+      }
+   }
+}

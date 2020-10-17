@@ -28,7 +28,7 @@
   <!-- <img alt="Github stars" src="https://img.shields.io/github/stars/dionathanCordova/nlw-3?color=56BEB8" /> -->
 </p>
 
-Status
+<!-- Status -->
 
 <h4 align="center"> 
 	🚧  NLW 3 🚀 Under construction...  🚧
@@ -77,6 +77,9 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [React Native](https://facebook.github.io/react-native/)
 - [Expo](https://expo.io/)
 - [TypeScript](https://www.typescriptlang.org/)
+- [TypeORM](https://typeorm.io/#/)
+- [Docker](https://docs.docker.com/compose/)
+- [PostgreSQL](https://www.postgresql.org/)
 
 ## 🔖 Layout
 
@@ -101,8 +104,11 @@ $ cd nlw-3
 
 # Rodando o server
 $ yarn && yarn dev:server
-# PS por motivos de conexão entre dispositivo fisico e o server, o server esta com a base url com o IP LOCAL da rede,
 # ex : http://10.0.0.101:3333, altere este ip colocando o ip que representa o seu cenário.
+# PS por motivos de conexão entre dispositivo fisico e o server, o server esta com a base url com o IP LOCAL da rede,
+
+# Gerando a imagem do banco de dados para a aplicacao
+$ docker run --name postgress_node -e POSTGRES_PASSWORD=docker -p 5434:5432 -d postgres
 
 # Rodando o web (ReactJs)
 $ yarn && yarn start

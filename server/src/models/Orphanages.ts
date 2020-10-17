@@ -1,6 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn, ManyToOne } from 'typeorm';
 import Image from './Image';
-
+import User from './User';
 @Entity('orphanages')
 export default class Orphanages {
     @PrimaryGeneratedColumn('increment')
@@ -32,4 +32,8 @@ export default class Orphanages {
     })
     @JoinColumn({name: 'orphanage_id'})
     images: Image[];
+
+    @ManyToOne(() => User, user => user.id)
+    @JoinColumn({name: 'user_id'})
+    user: User
 }
