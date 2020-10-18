@@ -36,6 +36,6 @@ export default class UserModel {
    @OneToMany(() => Orphanages, orphanage => orphanage.user, {
       cascade: ['insert', 'update']
    })
-   @JoinColumn({name : 'user_id'})
-   orphanages: Orphanages
+   @JoinColumn({ name: 'user_id' })
+   orphanages: Orphanages;
 }

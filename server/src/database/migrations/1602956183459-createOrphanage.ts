@@ -48,6 +48,11 @@ export class createOrphanage1602956183459 implements MigrationInterface {
                   default: false
                },
                {
+                  name: 'isConfirm',
+                  type: 'boolean',
+                  default: false
+               },
+               {
                   name: 'user_id',
                   type: 'uuid'
                },
@@ -58,7 +63,7 @@ export class createOrphanage1602956183459 implements MigrationInterface {
                   columnNames: ['user_id'],
                   referencedTableName: 'users',
                   referencedColumnNames: ['id'],
-                  onDelete: 'CASCADE',
+                  onDelete: 'SET NULL',
                   onUpdate: 'CASCADE'
                }
             ]

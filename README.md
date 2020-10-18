@@ -60,7 +60,7 @@ Describe your project -->
 <!-- :heavy_check_mark: -->
 :heavy_check_mark: Acesso restrito\
 :heavy_check_mark: Recuperação de senhas\
-:x: Cadastro de orfanatos\
+:heavy_check_mark: Cadastro de orfanatos\
 :x: Splash Screen no React Native com Expo\
 :x: Onboarding do usuário\
 :x: Localização real do usuário\
