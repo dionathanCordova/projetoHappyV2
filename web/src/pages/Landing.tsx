@@ -8,27 +8,33 @@ import { Link } from 'react-router-dom';
 import LogoImg from '../images/Logo.svg';
 
 function Landing() {
-    return (
-        <div id="page-landing">
-            <div className="content-wrapper">
-                <img src={LogoImg} alt=""/>
+   return (
+      <div id="page-landing">
+         <div className="content-wrapper">
+            <div className='box-1'>
+               <img src={LogoImg} alt="" />
 
-                <main>
-                    <h1>Leve felicidade para o mundo</h1>
-                    <p>Visite orfanatos e mude o dia de muitas crianças.</p>
-                </main>
-
-                    <div className="location">
-                    <strong>Camboriú</strong>
-                    <span>Santa Catarina</span>
-                </div>
-
-                <Link to="orphanages" className="enter-app">
-                    <FiArrowRight size={26} color="rgba(0, 0, 0, 0.6)"/>
-                </Link>
+               <div className="location">
+                  <strong>Camboriú</strong>
+                  <span>Santa Catarina</span>
+               </div>
             </div>
-        </div>
-    )
+
+            <main>
+               <h1>Leve felicidade para o mundo</h1>
+               <p>Visite orfanatos e mude o dia de muitas crianças.</p>
+            </main>
+
+            <div className="acesso-restrito">
+               <button>Acesso restrito</button>
+            </div>
+
+            <Link to="orphanages" className="enter-app">
+               <FiArrowRight size={26} color="rgba(0, 0, 0, 0.6)" />
+            </Link>
+         </div>
+      </div>
+   )
 }
 
 export default Landing;
