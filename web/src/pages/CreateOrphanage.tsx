@@ -4,7 +4,7 @@ import { LeafletMouseEvent } from 'leaflet'
 
 import { FiPlus } from "react-icons/fi";
 
-import Sidebar from "../components/Sidebar";
+// import Sidebar from "../components/Sidebar";
 import happyMapIcon from "../utils/mapIcon";
 
 import '../styles/pages/create-orphanage.css';
@@ -88,7 +88,7 @@ export default function CreateOrphanage() {
    return (
       <div id="page-create-orphanage">
 
-         <Sidebar />
+         {/* <Sidebar>.</Sidebar> */}
 
          <main>
             <form className="create-orphanage-form" onSubmit={handleSubmit}>

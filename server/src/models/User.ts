@@ -38,4 +38,4 @@ export default class UserModel {
    })
    @JoinColumn({ name: 'user_id' })
    orphanages: Orphanages;
-}
+} 

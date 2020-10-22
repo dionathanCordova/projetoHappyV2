@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 
 import mapMarkerImg from '../images/map-marker.svg';
 import happyMapIcon from '../utils/mapIcon';
 
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { FiPlus, FiArrowRight } from 'react-icons/fi';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 
 import '../styles/pages/orphanages-map.css';
 import api from '../services/api';
+import AuthContext from '../contexts';
+import swal from 'sweetalert';
 
 interface OrphanageInterface {
    id: number;
@@ -22,6 +24,9 @@ function Orphanages() {
    const [latitude, setLatitude] = useState(0);
    const [longitude, setLongitude] = useState(0);
 
+   const { user, signed } = useContext(AuthContext);
+   const history = useHistory();
+
    useEffect(() => {
       api.get('orphanages').then(response => {
          setOrphanages(response.data);
@@ -34,6 +39,22 @@ function Orphanages() {
          setLatitude(latitude);
          setLongitude(longitude);
       })
+   }, [])
+
+   const handleCreateOrphamage = useCallback(() => {
+      if (!signed) {
+         swal(
+            "Olá!",
+            'Para criar o registro de um orphanato você precisa estar logado, deseja se cadastrar?', {
+               buttons: ["Não!", "Sim!"],
+            }).then((willDelete) => {
+               if (willDelete) {
+                  history.push('/signup');
+               }
+            });
+      } else {
+         history.push('/orphanages/create');
+      }
    }, [])
 
    return (
@@ -76,12 +97,11 @@ function Orphanages() {
                   </Marker>
                )
             })}
-
          </Map>
 
-         <Link to="/orphanages/create" className="create-orphanage">
+         <button onClick={handleCreateOrphamage} className="create-orphanage" >
             <FiPlus size={32} color="#fff" />
-         </Link>
+         </button>
       </div>
    )
 }

@@ -6,9 +6,7 @@ export default class AuthController {
    public async create(request: Request, response: Response): Promise<Response> {
       try {
          const { email, password } = request.body;
-
          const authService = new CreateAuthService();
-
          const {user, token} = await authService.execute({email, password});
 
          return response.json({user, token});

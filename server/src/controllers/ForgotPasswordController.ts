@@ -12,7 +12,7 @@ export default class ForgotPasswordController {
          return response.json({ forgotPass });
          
       } catch (error) {
-         return response.json({message: error.message});
+         return response.json({message: error.message, status: 'erro'});
       }
    }
 }

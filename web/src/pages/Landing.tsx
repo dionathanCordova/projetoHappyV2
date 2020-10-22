@@ -3,11 +3,17 @@ import React from 'react';
 import '../styles/pages/landing.css'
 
 import { FiArrowRight } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import LogoImg from '../images/Logo.svg';
 
-function Landing() {
+const Landing: React.FC = () => {
+   const history = useHistory();
+
+   function handleLogin() {
+      history.push('/signin');
+   }
+
    return (
       <div id="page-landing">
          <div className="content-wrapper">
@@ -26,7 +32,7 @@ function Landing() {
             </main>
 
             <div className="acesso-restrito">
-               <button>Acesso restrito</button>
+               <button onClick={handleLogin}>Acesso restrito</button>
             </div>
 
             <Link to="orphanages" className="enter-app">
