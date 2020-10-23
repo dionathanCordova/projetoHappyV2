@@ -30,6 +30,9 @@ export default class Orphanages {
    @Column()
    isConfirm: boolean;
 
+   @Column()
+   user_id : string;
+
    @ManyToOne(() => User, user => user.orphanages)
    @JoinColumn({ name: 'user_id' })
    user: User;

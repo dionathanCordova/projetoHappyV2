@@ -24,7 +24,7 @@ function Orphanages() {
    const [latitude, setLatitude] = useState(0);
    const [longitude, setLongitude] = useState(0);
 
-   const { user, signed } = useContext(AuthContext);
+   const { user, signed, signOut } = useContext(AuthContext);
    const history = useHistory();
 
    useEffect(() => {

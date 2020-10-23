@@ -28,5 +28,6 @@ routes.post('/forgotpass', forgotpassController.create);
 routes.get('/orphanages', orphanagesController.index);
 routes.post('/orphanages', upload.array('images'), orphanagesController.create);
 routes.get('/orphanages/details/:id', orphanagesController.show);
+routes.get('/orphanages/mylist/:id', orphanagesController.findOrphamageByUserId);
 
 export default routes;

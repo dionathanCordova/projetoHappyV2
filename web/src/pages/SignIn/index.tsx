@@ -1,9 +1,9 @@
 import React, { FormEvent, useCallback, useContext, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { FiArrowLeft } from 'react-icons/fi';
 
 import logo from '../../images/Logotipo.svg';
 import Input from '../../components/Input';
-import { FiArrowLeft } from 'react-icons/fi';
-import { Link, useHistory } from 'react-router-dom';
 import swal from 'sweetalert';
 
 import AuthContext from '../../contexts';

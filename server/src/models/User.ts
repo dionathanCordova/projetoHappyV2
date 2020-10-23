@@ -27,6 +27,9 @@ export default class UserModel {
    @UpdateDateColumn()
    password_reset_expires: Date
 
+   @Column()
+   isAdmin: boolean
+
    @CreateDateColumn()
    created_at: Date;
 

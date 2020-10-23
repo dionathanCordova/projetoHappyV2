@@ -1,18 +1,20 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 import { Map, Marker, TileLayer } from 'react-leaflet';
 import { LeafletMouseEvent } from 'leaflet'
-
+import { useHistory } from "react-router-dom";
 import { FiPlus } from "react-icons/fi";
 
-// import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/Sidebar";
 import happyMapIcon from "../utils/mapIcon";
+import AuthContext from '../contexts';
 
 import '../styles/pages/create-orphanage.css';
 import api from "../services/api";
-import { useHistory } from "react-router-dom";
+import swal from 'sweetalert';
 
 export default function CreateOrphanage() {
    const history = useHistory();
+   const { user, signed, signOut } = useContext(AuthContext);
 
    const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
 
@@ -64,6 +66,7 @@ export default function CreateOrphanage() {
       data.append('instruction', instruction);
       data.append('opening_hours', opening_hours);
       data.append('open_on_weekends', String(open_on_weekends));
+      data.append('user_id', user.id);
 
       images.forEach(image => {
          data.append('images', image);
@@ -71,7 +74,11 @@ export default function CreateOrphanage() {
 
       await api.post('orphanages', data);
 
-      alert('cadastro realizado com sucesso!');
+      swal(
+         "",
+         'Cadastro realizado com sucesso! Aguarde até que este cadastro seja confirmado.',
+         'success'
+      );
       history.push('/orphanages');
 
    }
@@ -88,7 +95,7 @@ export default function CreateOrphanage() {
    return (
       <div id="page-create-orphanage">
 
-         {/* <Sidebar>.</Sidebar> */}
+         <Sidebar>.</Sidebar>
 
          <main>
             <form className="create-orphanage-form" onSubmit={handleSubmit}>

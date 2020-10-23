@@ -2,7 +2,7 @@ import React from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
 import mapMarkerImg from '../../images/map-marker.svg';
 
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { ReactNode } from 'react';
 
 import {
@@ -23,7 +23,9 @@ export default function Sidebar({ children, colorFirstIcon, colorSecondIcon }: A
 
    return (
       <Container>
-         <img src={mapMarkerImg} alt="Happy" />
+         <Link to="/">
+            <img src={mapMarkerImg} alt="Happy" />
+         </Link>
 
          <Children colorFirstIcon={colorFirstIcon} colorSecondIcon={colorSecondIcon}>
             {children}

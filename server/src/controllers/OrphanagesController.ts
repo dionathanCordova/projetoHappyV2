@@ -4,6 +4,7 @@ import orphanageView from '../views/orphanages_view';
 import * as Yup from 'yup';
 
 import Orphanages from '../models/Orphanages';
+import UserModel from '../models/User';
 
 export default {
    async index(request: Request, response: Response) {
@@ -28,6 +29,24 @@ export default {
       return response.status(200).json(orphanageView.render(orphanagesDetail));
    },
 
+   async findOrphamageByUserId(request: Request, response: Response) {
+      try {
+         const { user_id } = request.body;
+         console.log(user_id);
+
+         const orphanagesRepository = getRepository(Orphanages);
+         const orphanage = await orphanagesRepository.find({
+            where: {user_id}
+         })
+
+
+         return response.status(200).json(orphanage);
+      } catch (error) {
+         return response.status(400).json({status: 'erro', statusCode: 400});
+      }
+     
+   },
+
    async create(request: Request, response: Response) {
       try {
          const { name, latitude, longitude, about, instruction, opening_hours, open_on_weekends, isConfirm, user_id } = request.body;
@@ -50,7 +69,8 @@ export default {
             opening_hours,
             instruction,
             user: user_id,
-            images
+            images,
+            user_id: user_id
          };
          
          const schema = Yup.object().shape({
@@ -61,6 +81,7 @@ export default {
             open_on_weekends: Yup.boolean().required(),
             isConfirm: Yup.boolean().required(),
             user: Yup.string().required(),
+            user_id: Yup.string().required(),
             opening_hours: Yup.string().required(),
             instruction: Yup.string().required(),
             images: Yup.array(
@@ -69,8 +90,6 @@ export default {
                })
             )
          })
-
-         console.log(data);
 
          await schema.validate(data, {
             abortEarly: false
