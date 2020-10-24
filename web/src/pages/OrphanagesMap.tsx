@@ -28,6 +28,8 @@ function Orphanages() {
    const history = useHistory();
 
    useEffect(() => {
+      // signOut();
+
       api.get('orphanages').then(response => {
          setOrphanages(response.data);
       })

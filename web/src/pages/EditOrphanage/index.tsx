@@ -4,15 +4,16 @@ import { LeafletMouseEvent } from 'leaflet'
 import { useHistory } from "react-router-dom";
 import { FiPlus } from "react-icons/fi";
 
-import Sidebar from "../components/Sidebar";
-import happyMapIcon from "../utils/mapIcon";
-import AuthContext from '../contexts';
+import Sidebar from "../../components/Sidebar";
+import happyMapIcon from "../../utils/mapIcon";
+import AuthContext from '../../contexts';
 
-import '../styles/pages/create-orphanage.css';
-import api from "../services/api";
+import '../../styles/pages/create-orphanage.css';
+import api from "../../services/api";
 import swal from 'sweetalert';
+import state from "sweetalert/typings/modules/state";
 
-export default function CreateOrphanage() {
+export default function EditOrphanage(props: any) {
    const history = useHistory();
    const { user, signed, signOut } = useContext(AuthContext);
 
@@ -27,14 +28,25 @@ export default function CreateOrphanage() {
    const [previewImages, setPreviewImages] = useState<string[]>([]);
    const [latitude, setLatitude] = useState(0);
    const [longitude, setLongitude] = useState(0);
+   const [orphanage_id, setOrphanageId] = useState(0);
 
    useEffect(() => {
-      navigator.geolocation.getCurrentPosition((position) => {
-         const latitude = position.coords.latitude;
-         const longitude = position.coords.longitude;
+      const orphanageId = props.match.params.id;
+      setOrphanageId(orphanageId);
 
-         setLatitude(latitude);
-         setLongitude(longitude);
+      api.get(`orphanages/details/${orphanageId}`).then(response => {
+         const data = response.data;
+         setLatitude(data.latitude);
+         setLongitude(data.longitude);
+         setName(data.name);
+         setInstruction(data.instruction);
+         setOpeningHours(data.opening_hours);
+         setOpenOnWeekends(data.open_on_weekends);
+         setAbout(data.about);
+         setPosition({latitude: data.latitude, longitude: data.longitude});
+         setImages(data.images);
+
+         handleOrphanageImages(data.images);
       })
    }, []);
 
@@ -53,6 +65,14 @@ export default function CreateOrphanage() {
       setPreviewImages(selectedImagesPreview);
    }
 
+   function handleOrphanageImages(images: any[]) {
+      const selectedImagesPreview = images.map((image: any) => {
+         return image.url;
+      })
+
+      setPreviewImages(selectedImagesPreview);
+   }
+
    async function handleSubmit(event: FormEvent) {
       event.preventDefault();
 
@@ -60,32 +80,35 @@ export default function CreateOrphanage() {
 
       const data = new FormData();
       data.append('name', name);
-      data.append('about', about);
       data.append('latitude', String(latitude));
       data.append('longitude', String(longitude));
+      data.append('about', about);
       data.append('instruction', instruction);
       data.append('opening_hours', opening_hours);
       data.append('open_on_weekends', String(open_on_weekends));
-      data.append('user_id', user.id);
+      data.append('orphanage_id', String(orphanage_id));
 
       images.forEach(image => {
          data.append('images', image);
       })
 
-      await api.post('orphanages', data).then(response => {
+      await api.put('orphanages', data).then(response => {
+         console.log(response);
          if(response.status == 201) {
             swal(
                "",
                'Cadastro realizado com sucesso! Aguarde até que este cadastro seja confirmado.',
                'success'
             );
+
             history.push('/orphanages');
          }
-      }).catch(err =>{
+      }).catch(err => {
          console.log(err.message);
+
          swal(
             "",
-            'Erro ao cadastrar',
+            'Cadastro realizado com sucesso! Aguarde até que este cadastro seja confirmado.',
             'warning'
          );
       });

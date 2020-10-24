@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
 import { Link, useHistory } from 'react-router-dom';
 
-// import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/Sidebar";
 import happyMapIcon from "../utils/mapIcon";
 import api from "../services/api";
 interface OrphanageInterface {
@@ -47,7 +47,7 @@ const Orphanage: React.FC = () => {
    return (
       <div id="page-orphanage">
 
-         {/* <Sidebar> </Sidebar> */}
+         <Sidebar>.</Sidebar>
 
          <main>
             <div className="orphanage-details">
