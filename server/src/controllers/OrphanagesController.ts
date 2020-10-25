@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getRepository } from 'typeorm';
+import { getConnection, getRepository } from 'typeorm';
 import orphanageView from '../views/orphanages_view';
 import * as Yup from 'yup';
 
@@ -36,11 +36,11 @@ export default {
 
    async findOrphamageByUserId(request: Request, response: Response) {
       try {
-         const { id } = request.params;
+         const { id, confirmed } = request.params;
 
          const orphanagesRepository = getRepository(Orphanages);
          const orphanage = await orphanagesRepository.find({
-            where: { user_id: id }
+            where: { user_id: id, isConfirm: confirmed }
          })
 
          return response.status(200).json(orphanage);
@@ -52,7 +52,7 @@ export default {
    async create(request: Request, response: Response) {
       try {
          const { name, latitude, longitude, about, instruction, opening_hours, open_on_weekends, isConfirm, user_id } = request.body;
-        
+
          const orphanagesRepository = getRepository(Orphanages);
 
          const requestImages = request.files as Express.Multer.File[];
@@ -111,10 +111,10 @@ export default {
          const { name, latitude, longitude, about, instruction, opening_hours, open_on_weekends, orphanage_id } = request.body;
 
          console.log(latitude, longitude);
-         
+
          const orphanagesRepository = getRepository(Orphanages);
          const orphanage = await orphanagesRepository.findOne({ id: orphanage_id });
-         
+
          const requestImages = request.files as Express.Multer.File[];
 
          const images = requestImages.map(image => {
@@ -131,7 +131,7 @@ export default {
             open_on_weekends: open_on_weekends === 'true',
             // images,
          };
-       
+
          const schema = Yup.object().shape({
             name: Yup.string().required(),
             latitude: Yup.number().required(),
@@ -159,9 +159,9 @@ export default {
             orphanage.open_on_weekends = data.open_on_weekends;
             orphanage.opening_hours = data.opening_hours;
             orphanage.instruction = data.instruction;
-   
+
             await orphanagesRepository.save(orphanage);
-            
+
             return response.status(201).json({ orphanage });
          }
 
@@ -169,5 +169,21 @@ export default {
       } catch (error) {
          return response.status(404).json({ message: error.message });
       }
+   },
+
+   async removeOrphanage(request: Request, response: Response) {
+      const { user_id, id } = request.params;
+
+      const orphanagesRepository = getRepository(Orphanages);
+      const orphanage = await orphanagesRepository.findOne({
+         where: { id, user_id }
+      })
+
+      if (orphanage) {
+         await orphanagesRepository.remove(orphanage);
+         return response.status(201).json({ status: 'ok' })
+      }
+
+      return response.status(403).json({status: 'erro'})
    }
 }

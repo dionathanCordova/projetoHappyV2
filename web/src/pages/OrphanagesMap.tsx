@@ -63,7 +63,9 @@ function Orphanages() {
       <div id="page-map">
          <aside>
             <header>
-               <img src={mapMarkerImg} alt="happy logo" />
+               <button onClick={() => history.push('/')}>
+                  <img src={mapMarkerImg} alt="happy logo" />
+               </button>
 
                <h2>Escolha um orfanato do mapa</h2>
                <p>Muitas crianças estão esperando a sua visita :) </p>

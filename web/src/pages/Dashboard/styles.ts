@@ -5,7 +5,7 @@ interface ButtonProps {
 }
 
 export const Container = styled.div`
-   width: 100vw;
+   width: 90vw;
    height: 100vh;
 `
 
@@ -19,6 +19,7 @@ export const Aside = styled.aside<ButtonProps>`
 `
 
 export const Content = styled.div`
+   width: 85vw;
    margin-left: 200px;
    height: 100px;
    display: flex;
@@ -43,19 +44,22 @@ export const Content = styled.div`
    }
 `
 export const MapContainer = styled.div`
-   display: flex;
-   flex-direction: row;
+   display: grid;
+   align-items: center;
+   grid-template-columns: repeat(2, minmax(240px, 1fr));
+   max-width: 77vw;
+
 `
 
 export const MapContent = styled.div`
-   margin-right: 20px;
-   width: 75vmin;
-   margin-top: 64px;
+
+   margin: 4px 3px;
    background: #FFF;
    border: 1px solid #B3DAE2;
    border-radius: 20px;
 
    .footer {
+
       padding: 20px 0;
       display: grid;
       column-gap: 20px;
@@ -95,7 +99,11 @@ export const MapContent = styled.div`
       border-radius: 20px;
    }
 `
-
-    
+export const EmptyContent = styled.div`
+   margin:auto;
+   width: 80vw;
+   margin-top: 30vmin;
+   text-align: center;
+`
 
      

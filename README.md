@@ -65,7 +65,7 @@ Describe your project -->
 :x: Onboarding do usuário\
 :heavy_check_mark: Localização real do usuário\
 :x: Cadastro em múltiplas etapas\
-:x: Logout da aplicação\
+:heavy_check_mark: Logout da aplicação\
 :x: Deploy da aplicação
 
 ## 🚀 Tecnologias

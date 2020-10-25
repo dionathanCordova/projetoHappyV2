@@ -3,6 +3,7 @@ import Image from './Image';
 import User from './User';
 @Entity('orphanages')
 export default class Orphanages {
+   [x: string]: any;
    @PrimaryGeneratedColumn('increment')
    id: number;
 

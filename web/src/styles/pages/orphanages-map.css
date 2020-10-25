@@ -36,6 +36,12 @@
    font-weight: 800;
 }
 
+#page-map aside button {
+   background: transparent;
+   border: 0;
+   outline: none;
+}
+
 #page-map .leaflet-container {
    z-index: 5;
 }

@@ -79,4 +79,8 @@ export const Button = styled.button`
    &:hover{
       background: #17D6EB;
    }
+
+   #powerof{
+      width: 25px;
+   }
 `
