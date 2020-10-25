@@ -39,16 +39,22 @@ export const AuthProvider: React.FC = ({ children }) => {
    const [ data, setData ] = useState<ResponseSignInUser>(() => {
       const storageUser    = localStorage.getItem('@AuthHappy:user');
       const storageToken   = localStorage.getItem('@AuthHappy:token');
-      const remember       = (localStorage.getItem('@AuthHappy:remember')) ? true : false;
+      const remember       = (localStorage.getItem('@AuthHappy:remember') === 'true') ? true : false;
 
       if(storageUser && storageToken) {
          return { user: JSON.parse(storageUser), token: storageToken, rememberMe: remember};
+      }
+
+      if(remember) {
+         setSigned(true);
       }
 
       return {} as ResponseSignInUser;
    })
 
    async function signIn(email: string, password: string, rememberMe: boolean):Promise<SignedResult> {
+     
+     
       const reponse = await api.post<ResponseSignInUser>('auth', {
          email, 
          password
@@ -62,6 +68,7 @@ export const AuthProvider: React.FC = ({ children }) => {
          localStorage.setItem("@AuthHappy:token", token);
          
          localStorage.setItem("@AuthHappy:remember", rememberMe ? 'true' : 'false');
+
          setUser(user);
          setSigned(true);
          setData({user, token, rememberMe});
@@ -79,7 +86,7 @@ export const AuthProvider: React.FC = ({ children }) => {
    async function signOut() {
       localStorage.removeItem('@AuthHappy:user');
       localStorage.removeItem('@AuthHappy:token');
-      localStorage.setItem("@AuthProffy:remember", 'false');
+      localStorage.removeItem("@AuthProffy:remember");
 
       setUser({} as UserProps);
       setSigned(false);
@@ -102,7 +109,7 @@ export const AuthProvider: React.FC = ({ children }) => {
    return (
       <AuthContext.Provider value={{ 
          user: data.user,
-         signed: !!data.user,
+         signed: signed,
          remember: !!data.rememberMe,
          signIn,
          signOut,

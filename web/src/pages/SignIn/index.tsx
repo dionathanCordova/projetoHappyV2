@@ -43,8 +43,7 @@ const SignIn: React.FC = () => {
             'warning'
          );
       });
-      // console.log(createUser);
-   }, [email, password])
+   }, [email, history, password, rememberMe, signIn])
 
    return (
       <Container>

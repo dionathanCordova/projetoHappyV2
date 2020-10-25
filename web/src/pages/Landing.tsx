@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import '../styles/pages/landing.css'
 
 import { FiArrowRight } from 'react-icons/fi';
 import { Link, useHistory } from 'react-router-dom';
+import AuthContext from '../contexts';
 
 import LogoImg from '../images/Logo.svg';
 
 const Landing: React.FC = () => {
    const history = useHistory();
+   const { user, signed, signOut } = useContext(AuthContext);
 
    function handleLogin() {
-      history.push('/signin');
+      
+      console.log(user, signed);
+      if(signed) {
+         history.push('/dashboard');
+      }else {
+         history.push('/signin');
+      }
    }
 
    return (

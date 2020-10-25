@@ -41,7 +41,7 @@ function Orphanages() {
          setLatitude(latitude);
          setLongitude(longitude);
       })
-   }, [])
+   }, [signOut, signed])
 
    const handleCreateOrphamage = useCallback(() => {
       if (!signed) {
@@ -57,7 +57,7 @@ function Orphanages() {
       } else {
          history.push('/orphanages/create');
       }
-   }, [])
+   }, [history, signed])
 
    return (
       <div id="page-map">
