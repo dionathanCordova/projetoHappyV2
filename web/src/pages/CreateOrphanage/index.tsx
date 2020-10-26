@@ -4,13 +4,16 @@ import { LeafletMouseEvent } from 'leaflet'
 import { useHistory } from "react-router-dom";
 import { FiPlus } from "react-icons/fi";
 
-import Sidebar from "../components/Sidebar";
-import happyMapIcon from "../utils/mapIcon";
-import AuthContext from '../contexts';
-
-import '../styles/pages/create-orphanage.css';
-import api from "../services/api";
+import api from "../../services/api";
 import swal from 'sweetalert';
+
+import Sidebar from "../../components/Sidebar";
+import happyMapIcon from "../../utils/mapIcon";
+import AuthContext from '../../contexts';
+
+import Xcircle from '../../images/x-circle.svg';
+
+import './create-orphanage.css';
 
 export default function CreateOrphanage() {
    const history = useHistory();
@@ -38,6 +41,14 @@ export default function CreateOrphanage() {
       })
    }, []);
 
+   function handleOrphanageImages(images: any[]) {
+      const selectedImagesPreview = images.map((image: any) => {
+         return image.url;
+      })
+
+      setPreviewImages(selectedImagesPreview);
+   }
+
    function handleSelectImages(event: ChangeEvent<HTMLInputElement>) {
       if (!event.target.files) {
          return
@@ -51,6 +62,12 @@ export default function CreateOrphanage() {
       })
 
       setPreviewImages(selectedImagesPreview);
+   }
+
+   function handleRemoveImage(index: number) {
+      const oldImages = [ ... previewImages];
+      oldImages.splice(index, 1);
+      setPreviewImages(oldImages);
    }
 
    async function handleSubmit(event: FormEvent) {
@@ -74,12 +91,7 @@ export default function CreateOrphanage() {
 
       await api.post('orphanages', data).then(response => {
          if(response.status == 201) {
-            swal(
-               "",
-               'Cadastro realizado com sucesso! Aguarde até que este cadastro seja confirmado.',
-               'success'
-            );
-            history.push('/orphanages');
+            history.push('/orphanage/createconfirm');
          }
       }).catch(err =>{
          console.log(err.message);
@@ -147,9 +159,14 @@ export default function CreateOrphanage() {
                      <label htmlFor="images">Fotos</label>
 
                      <div className="images-container">
-                        {previewImages.map(image => {
+                        {previewImages.map((image, index) => {
                            return (
-                              <img key={image} src={image} alt="" />
+                              <div key={image}>
+                                 <button id="removeImg" type="button" onClick={() => handleRemoveImage(index)}>
+                                    <img src={Xcircle} alt=""/>
+                                 </button>
+                                 <img id="uploadedImg" src={image} alt="" />
+                              </div>
                            )
                         })}
 

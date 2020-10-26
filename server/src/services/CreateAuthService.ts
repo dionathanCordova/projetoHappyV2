@@ -10,29 +10,33 @@ interface IAuthDTO {
 }
 
 export default class CreateAuthService {
-   public async execute({email, password}: IAuthDTO): Promise<any> {
-      const userRepository = getRepository(UserModel)
+   public async execute({ email, password }: IAuthDTO): Promise<any> {
+      try {
+         const userRepository = getRepository(UserModel)
 
-      const user = await userRepository.findOne({
-         where: {email}
-      });
+         const user = await userRepository.findOne({
+            where: { email }
+         });
 
-      if(!user) {
-         throw new Error('Credentials dont match');
+         if (!user) {
+            throw new Error('Credentials dont match');
+         }
+
+         const comparePass = await compare(password, user?.password);
+
+         if (!comparePass) {
+            throw new Error('Credentials not match');
+         }
+
+         const accessToken = process.env.ACCESS_TOKEN_SECRET;
+         const token = sign({}, `${accessToken}`, {
+            subject: user.email,
+            expiresIn: '1d'
+         })
+
+         return { 'user': UserView.render(user), 'token': token };
+      } catch (error) {
+         return {status : 'erro', message : error.message}
       }
-
-      const comparePass = await compare(password, user?.password);
-
-      if(!comparePass) {
-         throw new Error('Credentials not match');
-      }
-
-      const accessToken = process.env.ACCESS_TOKEN_SECRET;
-      const token = sign({}, `${accessToken}`, {
-         subject: user.email,
-         expiresIn: '1d'
-      })
-
-      return {'user' : UserView.render(user), 'token' : token};
    }
 }

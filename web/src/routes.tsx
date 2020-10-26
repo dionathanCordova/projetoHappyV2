@@ -1,16 +1,20 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import Landing from './pages/Landing';
-import Orphanages from './pages/OrphanagesMap';
-import CreateOrphanage from './pages/CreateOrphanage';
+import Landing from './pages/Landing/index';
+// import Orphanages from './pages/OrphanagesMap';
+import Orphanages from './pages/OrphanagesMap/index';
+import CreateOrphanage from './pages/CreateOrphanage/index';
 import EditOrphanage from './pages/EditOrphanage/index';
-import Orphanage from './pages/Orphanage';
+import OrphanageDetails from './pages/OrophanageDetail';
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp/index';
 import ForgotPass from './pages/ForgotPass/index';
 import DashboardIndex from './pages/Dashboard';
 import DashboardNotRegistered from './pages/Dashboard/pendent';
+
+import PageConfirm from './components/PageComfirm';
+import PageRemove from './components/PageRemove';
 
 import { AuthProvider} from './contexts';
 
@@ -23,7 +27,7 @@ function Routes() {
                <Route path="/orphanages" exact component={Orphanages} />
                <Route path="/orphanages/create" component={CreateOrphanage} />
                <Route path="/orphanages/edit/:id" component={EditOrphanage} />
-               <Route path="/orphanages/:id" component={Orphanage} />
+               <Route path="/orphanages/:id" component={OrphanageDetails} />
                
                <Route path="/signin" component={SignIn} />
                <Route path="/signup" component={SignUp} />
@@ -31,6 +35,9 @@ function Routes() {
 
                <Route path="/dashboard" exact component={DashboardIndex} />
                <Route path="/dashboard/notregistered" component={DashboardNotRegistered} />
+
+               <Route path="/orphanage/createconfirm" component={PageConfirm} />
+               <Route path="/orphanage/removeconfirm" component={PageRemove} />
             </Switch>
          </AuthProvider>
       </BrowserRouter>

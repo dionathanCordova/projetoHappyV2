@@ -42,6 +42,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       const remember       = (localStorage.getItem('@AuthHappy:remember') === 'true') ? true : false;
 
       if(storageUser && storageToken) {
+         setSigned(true);
          return { user: JSON.parse(storageUser), token: storageToken, rememberMe: remember};
       }
 

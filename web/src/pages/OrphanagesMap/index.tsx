@@ -1,16 +1,21 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 
-import mapMarkerImg from '../images/map-marker.svg';
-import happyMapIcon from '../utils/mapIcon';
+import mapMarkerImg from '../../images/map-marker.svg';
+import happyMapIcon from '../../utils/mapIcon';
 
 import { Link, useHistory } from 'react-router-dom';
 import { FiPlus, FiArrowRight } from 'react-icons/fi';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 
-import '../styles/pages/orphanages-map.css';
-import api from '../services/api';
-import AuthContext from '../contexts';
+import api from '../../services/api';
+import AuthContext from '../../contexts';
 import swal from 'sweetalert';
+
+import {
+   Container,
+   Aside,
+   CreateOrphanage   
+} from './styles';
 
 interface OrphanageInterface {
    id: number;
@@ -60,8 +65,8 @@ function Orphanages() {
    }, [history, signed])
 
    return (
-      <div id="page-map">
-         <aside>
+      <Container>
+         <Aside>
             <header>
                <button onClick={() => history.push('/')}>
                   <img src={mapMarkerImg} alt="happy logo" />
@@ -75,7 +80,7 @@ function Orphanages() {
                <strong>Camboriú</strong>
                <span>Santa Catarina</span>
             </footer>
-         </aside>
+         </Aside>
 
          <Map
             center={[latitude, longitude]}
@@ -103,10 +108,10 @@ function Orphanages() {
             })}
          </Map>
 
-         <button onClick={handleCreateOrphamage} className="create-orphanage" >
+         <CreateOrphanage onClick={handleCreateOrphamage}>
             <FiPlus size={32} color="#fff" />
-         </button>
-      </div>
+         </CreateOrphanage>
+      </Container>
    )
 }
 

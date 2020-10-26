@@ -12,7 +12,7 @@ export default class AuthController {
          return response.json({user, token});
 
       } catch (error) {
-         return response.status(403).json({message: error.message})
+         return response.status(403).json({message2: error.message})
       }
    }
 }

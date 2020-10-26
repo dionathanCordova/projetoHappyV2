@@ -13,10 +13,11 @@ const errorHandler:ErrorRequestHandler = (error, request, response, next) => {
             erros[err.path] = err.errors;
         });
 
+        throw new Error('Validation fails')
         return response.status(400).json({message: 'Validation fails', erros})
     }
     
-    console.log(error);
+    throw new Error('Internal server error')
     return response.status(500).json({message: 'Internal server error'})
 }
 

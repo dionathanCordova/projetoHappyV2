@@ -21,6 +21,8 @@ export const Aside = styled.aside`
       flex-direction: column;
       align-items: center;
       font-size: 20px;
+
+      color: #FFF;
    }
 `
 export const Content = styled.div`

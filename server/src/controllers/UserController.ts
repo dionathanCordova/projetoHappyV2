@@ -18,16 +18,22 @@ export default class UserController {
    }
 
    public async create(request: Request, response: Response): Promise<Response> {
-      const { name, email, password, confirm_password } = request.body;
-
       try {
+         const { name, email, password, confirm_password } = request.body;
          const createUserService = new CreateUserService();
-         const createUser = await createUserService.execute({name, email, password, confirm_password});
          
-         return response.status(200).json(createUser);
+         let rep ;
+         await createUserService.execute({name, email, password, confirm_password}).then(response => {
+            console.log('response: ' + response);
+            rep = {status : 'ok', message : 'ok', data: response.data};
+         }).catch(err => {
+            rep = {status : 'erro', message: err.message};
+         });
+         
+         return response.json(rep);
          
       } catch (error) {
-         return response.status(404).json({message: error.message});
+         return response.status(404).json({status: 'erro', message: error.message});
       }
    }
 

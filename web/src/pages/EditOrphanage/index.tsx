@@ -8,10 +8,11 @@ import Sidebar from "../../components/Sidebar";
 import happyMapIcon from "../../utils/mapIcon";
 import AuthContext from '../../contexts';
 
-import '../../styles/pages/create-orphanage.css';
+import './styles.css';
 import api from "../../services/api";
 import swal from 'sweetalert';
 import state from "sweetalert/typings/modules/state";
+import Xcircle from '../../images/x-circle.svg';
 
 export default function EditOrphanage(props: any) {
    const history = useHistory();
@@ -19,6 +20,7 @@ export default function EditOrphanage(props: any) {
 
    const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
 
+   const [id, setId] = useState('');
    const [name, setName] = useState('');
    const [about, setAbout] = useState('');
    const [instruction, setInstruction] = useState('');
@@ -43,8 +45,9 @@ export default function EditOrphanage(props: any) {
          setOpeningHours(data.opening_hours);
          setOpenOnWeekends(data.open_on_weekends);
          setAbout(data.about);
-         setPosition({latitude: data.latitude, longitude: data.longitude});
+         setPosition({ latitude: data.latitude, longitude: data.longitude });
          setImages(data.images);
+         setId(data.id);
 
          handleOrphanageImages(data.images);
       })
@@ -94,7 +97,7 @@ export default function EditOrphanage(props: any) {
 
       await api.put('orphanages', data).then(response => {
          console.log(response);
-         if(response.status == 201) {
+         if (response.status == 201) {
             swal(
                "",
                'Cadastro realizado com sucesso! Aguarde até que este cadastro seja confirmado.',
@@ -123,6 +126,30 @@ export default function EditOrphanage(props: any) {
       })
    }
 
+   function handleRemoveImage(index: number) {
+      const oldImages = [ ... previewImages];
+      oldImages.splice(index, 1);
+      setPreviewImages(oldImages);
+   }
+
+   async function handleRemoveOrphanage(id: string) {
+      swal(
+         "Olá!",
+         'Deseja realmente remover este registro? ', {
+            buttons: ["Não!", "Sim!"],
+      }).then((willDelete) => {
+         if (willDelete) {
+            api.delete(`orphanages/${user.id}/${id}`).then(response => {
+               if(response.data.status == 'ok') {
+                  history.push('/orphanage/removeconfirm');
+               }
+            }).catch(err => {
+               console.log(err.message);
+            })
+         }
+      });
+   }
+
    return (
       <div id="page-create-orphanage">
 
@@ -130,6 +157,7 @@ export default function EditOrphanage(props: any) {
 
          <main>
             <form className="create-orphanage-form" onSubmit={handleSubmit}>
+
                <fieldset>
                   <legend>Dados</legend>
 
@@ -170,9 +198,14 @@ export default function EditOrphanage(props: any) {
                      <label htmlFor="images">Fotos</label>
 
                      <div className="images-container">
-                        {previewImages.map(image => {
+                        {previewImages.map((image, index) => {
                            return (
-                              <img key={image} src={image} alt="" />
+                              <div key={image}>
+                                 <button id="removeImg" type="button" onClick={() => handleRemoveImage(index)}>
+                                    <img src={Xcircle} alt="" />
+                                 </button>
+                                 <img id="uploadedImg" src={image} alt="" />
+                              </div>
                            )
                         })}
 
@@ -210,10 +243,16 @@ export default function EditOrphanage(props: any) {
                      </div>
                   </div>
                </fieldset>
+            
+               <div className="btnfooter">
+                  <button className="remove-button" onClick={() => handleRemoveOrphanage(id)} type="button">
+                     Remover
+                  </button>
 
-               <button className="confirm-button" type="submit">
-                  Confirmar
-          </button>
+                  <button className="confirm-button" type="submit">
+                     Confirmar
+                  </button>
+               </div>
             </form>
          </main>
       </div>

@@ -28,28 +28,31 @@ const SignUp: React.FC = () => {
 
    const handleSubmit = useCallback( async (e: FormEvent) => {
       e.preventDefault();
+
       if(name != '' && email != '' && password != '' && password.length > 5 && password == confirm_password) {
-         const createUser = await api.post('/user', {
+         await api.post('/user', {
             name,
             email,
             password,
             confirm_password
-         });
-
-         if(createUser.data.status == 'ok') {
-            signIn(email, password, false).then(response => {
-               if(response.signed) {
-                  history.push('/orphanages/create');
-               }
-            }).catch(err => {
+         }).then(response => {
+            if(response.data.status == 'erro') {
                swal(
                   "Ops!",
-                  'Credential not match',
+                  `${response.data.message}`,
                   'warning'
                );
-            });
-         }
-
+            }else{
+               signIn(email, password, false).then(response => {
+                  if(response.signed) {
+                     history.push('/orphanages/create');
+                  }
+               });
+            }
+           
+         }).catch(err => {
+            console.log('erro :' + err.message);
+         });
       }else {
          swal(
             "Ops!",
@@ -57,6 +60,7 @@ const SignUp: React.FC = () => {
             'warning'
          );
       }
+      
    }, [password, email, confirm_password]);
 
    return (
