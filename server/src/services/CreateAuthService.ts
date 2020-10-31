@@ -28,9 +28,9 @@ export default class CreateAuthService {
             throw new Error('Credentials not match');
          }
 
-         const accessToken = process.env.ACCESS_TOKEN_SECRET;
+         const accessToken = process.env.JWT_ACCESS_TOKEN_SECRET;
          const token = sign({}, `${accessToken}`, {
-            subject: user.email,
+            subject: user.id,
             expiresIn: '1d'
          })
 

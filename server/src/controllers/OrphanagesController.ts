@@ -184,6 +184,6 @@ export default {
          return response.status(201).json({ status: 'ok' })
       }
 
-      return response.status(403).json({status: 'erro'})
+      return response.status(403).json({status: 'erro', message: 'Some error occured while remove orphanage'})
    }
 }

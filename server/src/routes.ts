@@ -2,6 +2,7 @@ import { Router } from 'express';
 import multer from 'multer';
 
 import uploadConfig from './config/upload';
+import ensureAuthenticated from './middlewares/ensureAuthenticate';
 
 import orphanagesController from './controllers/OrphanagesController';
 
@@ -28,8 +29,8 @@ routes.post('/forgotpass', forgotpassController.create);
 routes.get('/orphanages', orphanagesController.index);
 routes.post('/orphanages', upload.array('images'), orphanagesController.create);
 routes.put('/orphanages', upload.array('images'), orphanagesController.update);
-routes.delete('/orphanages/:user_id/:id', orphanagesController.removeOrphanage);
+routes.delete('/orphanages/:user_id/:id', ensureAuthenticated, orphanagesController.removeOrphanage);
 routes.get('/orphanages/details/:id', orphanagesController.show);
-routes.get('/orphanages/mylist/:id/:confirmed', orphanagesController.findOrphamageByUserId);
+routes.get('/orphanages/mylist/:id/:confirmed', ensureAuthenticated, orphanagesController.findOrphamageByUserId);
 
 export default routes;
