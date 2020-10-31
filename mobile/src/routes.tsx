@@ -11,7 +11,7 @@ import OrphanagesDetails from './pages/OrphanagesDetails';
 import SelectMapPosition from './pages/CreateOrphanage/SelectMapPosition';
 import OrphanageData from './pages/CreateOrphanage/OrphanageData';
 import Header from './components/Header';
-import SimpleOnboarding from './components/Onboarding/onboarding';
+import SimpleOnboarding from './pages/Onboarding/onboarding';
 
 export default function Routes() {
     return (
