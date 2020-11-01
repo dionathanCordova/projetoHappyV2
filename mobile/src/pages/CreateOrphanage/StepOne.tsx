@@ -77,6 +77,7 @@ export default function StepOne() {
 
 			<Label>Numero Whatsapp</Label>
 			<Input />
+			
 
 			<Label>Fotos</Label>
 			<ImageView>
