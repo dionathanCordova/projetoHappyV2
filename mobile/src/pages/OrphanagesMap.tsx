@@ -25,14 +25,14 @@ export default function OrphanagesMap() {
 		api.get('orphanages').then(response => {
 			setOrphanages(response.data);
 		});
-	}, [])
+	}, [orphanages])
 
 	function handleNavigateToDetails(id: number) {
 		navigations.navigate('OrphanagesDetails', { id })
 	}
 
 	function handleNavigateToCreateOrphanage() {
-		navigations.navigate('SelectMapPosition')
+		navigations.navigate('InstructionCreate')
 	}
 
 	return (
