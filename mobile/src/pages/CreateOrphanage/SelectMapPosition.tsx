@@ -13,7 +13,8 @@ export default function SelectMapPosition() {
 	const navigation = useNavigation();
 
 	function handleNextStep() {
-		navigation.navigate('OrphanageData', {position});
+		// navigation.navigate('OrphanageData', {position});
+		navigation.navigate('StepOne', {position});
 	}
 
 	function handleSelectMapPosition(event: MapEvent) {

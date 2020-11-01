@@ -5,13 +5,17 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 const { Navigator, Screen } = createStackNavigator();
 
+import Header from './components/Header';
+import SimpleOnboarding from './pages/Onboarding/onboarding';
+
 import OrphanagesMap from './pages/OrphanagesMap';
 import OrphanagesDetails from './pages/OrphanagesDetails';
 
+import InstructionCreate from './pages/IntructionCreate/instruction';
+
+import StepOne from './pages/CreateOrphanage/StepOne';
 import SelectMapPosition from './pages/CreateOrphanage/SelectMapPosition';
 import OrphanageData from './pages/CreateOrphanage/OrphanageData';
-import Header from './components/Header';
-import SimpleOnboarding from './pages/Onboarding/onboarding';
 
 export default function Routes() {
     return (
@@ -48,6 +52,14 @@ export default function Routes() {
                         header: () => <Header title="Selecione no mapa"/>
                     }} 
                 />
+
+                <Screen 
+                    name="InstructionCreate" 
+                    component={InstructionCreate} 
+                    options={{
+                        headerShown: false
+                    }} 
+                />
                 
                 <Screen 
                     name="OrphanageData" 
@@ -57,6 +69,16 @@ export default function Routes() {
                         header: () => <Header title="Informe os dados"/>
                     }} 
                 />
+
+                <Screen
+                    name="StepOne"
+                    component={StepOne}
+                    options={{
+                        headerShown: true,
+                        header: () => <Header title="Informe os dados" />
+                    }}
+                />
+
             </Navigator>
         </NavigationContainer>
     )
