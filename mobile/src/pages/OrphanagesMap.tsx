@@ -7,7 +7,6 @@ import mapMarker from '../images/map-marker.png';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
 import api from '../services/api';
-import SimpleOnboarding from '../components/Onboarding/onboarding';
 
 interface OrphanageInterface {
 	id: number;
