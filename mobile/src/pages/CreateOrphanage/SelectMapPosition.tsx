@@ -1,20 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Dimensions, Text } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
 import MapView, { MapEvent, Marker } from 'react-native-maps';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import mapMarkerImg from '../../images/map-marker.png';
 
 export default function SelectMapPosition() {
 	const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
+	const [user_id, setUser] = useState('');
 
 	const navigation = useNavigation();
 
+	useEffect(() => {
+		AsyncStorage.getItem('@Happy:user_id').then(response => {
+			if (response) {
+				setUser(response);
+			}else {
+				navigation.navigate('Sign')
+			}
+		});
+	}, [])
+
 	function handleNextStep() {
-		// navigation.navigate('OrphanageData', {position});
-		navigation.navigate('StepOne', {position});
+		navigation.navigate('StepOne', {position, user_id});
 	}
 
 	function handleSelectMapPosition(event: MapEvent) {

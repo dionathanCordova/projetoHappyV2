@@ -75,6 +75,8 @@ export default {
             images
          };
 
+         console.log(data);
+
          const schema = Yup.object().shape({
             name: Yup.string().required(),
             latitude: Yup.number().required(),

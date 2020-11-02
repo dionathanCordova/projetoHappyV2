@@ -64,7 +64,7 @@ Describe your project -->
 :heavy_check_mark: Splash Screen no React Native com Expo\
 :heavy_check_mark: Onboarding do usuário\
 :heavy_check_mark: Localização real do usuário\
-:x: Cadastro em múltiplas etapas\
+:heavy_check_mark: Cadastro em múltiplas etapas\
 :heavy_check_mark: Logout da aplicação\
 :x: Deploy da aplicação
 

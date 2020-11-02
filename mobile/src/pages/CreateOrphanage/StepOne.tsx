@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { ScrollView, Text, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
-import { RectButton } from 'react-native-gesture-handler';
 
 import {
 	Container,
@@ -19,25 +18,32 @@ import {
 	Selected,
 	RemoveButton
 } from './styles';
-import { useRoute } from '@react-navigation/native';
 
+import { useNavigation, useRoute } from '@react-navigation/native';
 interface OrphanageRouteParams {
 	position: {
 		latitude: number;
 		longitude: number;
-	}
+	};
+	user_id: string;
 }
 
 export default function StepOne() {
 	const route = useRoute();
 	const param = route.params as OrphanageRouteParams;
+	const navigation = useNavigation();
 
 	const [images, setImages] = useState<string[]>([]);
+	const [character, setCharacter] = useState(300);
+	const [about, setAbout] = useState('');
+	const [name, setNome] = useState('');
+	const [whatsapp, setWhatsapp] = useState('');
 
 	async function handleSelectImages() {
+
 		const { status } = await ImagePicker.requestCameraPermissionsAsync();
 
-		if(status != 'granted') {
+		if (status != 'granted') {
 			alert('Para cadastrar fotos, precisamo de permissão de acesso...');
 			return;
 		}
@@ -48,12 +54,34 @@ export default function StepOne() {
 			mediaTypes: ImagePicker.MediaTypeOptions.Images,
 		});
 
-		if(result.cancelled) {
+		if (result.cancelled) {
 			return;
 		}
 
 		const { uri } = result;
 		setImages([...images, uri]);
+	}
+
+	function removeImage(index: number) {
+		const oldImage = [...images];
+		oldImage.splice(index, 1);
+		setImages(oldImage);
+	}
+
+	function handleStepDois() {
+		const { latitude, longitude } = param.position;
+
+		const data = {
+			name,
+			about,
+			latitude,
+			longitude,
+			images,
+			whatsapp,
+			user_id: param.user_id
+		}
+
+		navigation.navigate('StepDois', {data});
 	}
 
 	return (
@@ -64,43 +92,51 @@ export default function StepOne() {
 			</MultipleLabel>
 
 			<Label>Nome</Label>
-			<Input />
+			<Input 
+				value={name}
+				onChangeText={text => setNome(text)}
+			/>
 
 			<MultipleLabel>
 				<Label>Sobre</Label>
-				<Label>200 caracteres disponíveis</Label>
+				<Label>{character - about.length} caracteres disponíveis</Label>
 			</MultipleLabel>
 			<Input
 				style={{ height: 110 }}
 				multiline
+				value={about}
+				onChangeText={text => setAbout(text)}
 			/>
 
 			<Label>Numero Whatsapp</Label>
-			<Input />
-			
+			<Input 
+				value={whatsapp}
+				onChangeText={text => setWhatsapp(text)}
+			/>
 
 			<Label>Fotos</Label>
-			<ImageView>
-				{images.map(image => {
-					return(
+
+			{images.map((image, index) => {
+				return (
+					<ImageView key={image}>
 						<ContentImage>
-							<UploadedImage 	
-								key={image}
-								source={{uri: image}}
+							<UploadedImage
+								source={{ uri: image }}
 							/>
-							<RemoveButton>
-								<Feather name="x" size={34} color="#ff669d"/>
+							<RemoveButton onPress={() => removeImage(index)}>
+								<Feather name="x" size={34} color="#ff669d" />
 							</RemoveButton>
 						</ContentImage>
-					)
-				})}
-			</ImageView>
+					</ImageView>
+
+				)
+			})}
 
 			<ImageInput onPress={handleSelectImages}>
 				<Feather name="plus" size={24} color="#15B6D6" />
 			</ImageInput>
 
-			<Button>
+			<Button onPress={handleStepDois}>
 				<ButtonText>Próximo</ButtonText>
 			</Button>
 		</Container>
