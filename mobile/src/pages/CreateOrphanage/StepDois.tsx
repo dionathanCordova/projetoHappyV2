@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useRoute, useNavigation } from '@react-navigation/native';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native';
 import { FancyAlert } from 'react-native-expo-fancy-alerts';
+import { Ionicons } from '@expo/vector-icons';
+import api from '../../services/api';
 
 import {
 	Container,
@@ -15,7 +17,6 @@ import {
 	ContentButton,
 	ButtonNoBorder,
 } from './styles';
-import api from '../../services/api';
 
 interface DataDto {
 	data: {
@@ -96,25 +97,29 @@ export default function StepDois() {
 
 			<FancyAlert
 				visible={visible}
-				onRequestClose={() => navigation.navigate('OrphanagesMap')}
+				style={styles.alert}
 				icon={
-					<View style={{
-						flex: 1,
-						display: 'flex',
-						justifyContent: 'center',
-						alignItems: 'center',
-						backgroundColor: '#3CDC8C',
-						borderRadius: 50,
-						width: '100%',
-					}}>
-						<Text>🤓</Text>
+					<View style={[styles.icon, { borderRadius: 32 }]}>
+						<Ionicons
+							name={'md-close' }
+							size={36}
+							color="#FFFFFF"
+						/>
 					</View>
 				}
-				style={{ backgroundColor: 'white' }}
+				onRequestClose={() => setVisible(false)}
 			>
-				<Text onPress={() => navigation.navigate('OrphanagesMap')} style={{ marginTop: -16, marginBottom: 32 }}>
-					O cadastro deu certo e foi enviado ao administrador para ser aprovado. Agora é só esperar :)
-				</Text>
+				<View style={styles.content}>
+					<Text style={styles.contentText}>
+						O cadastro deu certo e foi
+						enviado ao administrador para ser
+						aprovado. Agora é só esperar
+					</Text>
+
+					<TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('OrphanagesMap')}>
+						<Text style={styles.btnText}>OK</Text>
+					</TouchableOpacity>
+				</View>
 			</FancyAlert>
 
 			<MultipleLabel>
@@ -154,3 +159,44 @@ export default function StepDois() {
 		</Container>
 	)
 }
+
+const styles = StyleSheet.create({
+	alert: {
+	  backgroundColor: '#EEEEEE',
+	},
+	icon: {
+	  flex: 1,
+	  display: 'flex',
+	  justifyContent: 'center',
+	  alignItems: 'center',
+	  backgroundColor: '#4CB748',
+	  width: '100%',
+	},
+	content: {
+	  display: 'flex',
+	  flexDirection: 'column',
+	  justifyContent: 'center',
+	  alignItems: 'center',
+	  marginTop: -16,
+	  marginBottom: 16,
+	},
+	contentText: {
+	  textAlign: 'center',
+	},
+	btn: {
+	  borderRadius: 32,
+	  display: 'flex',
+	  flexDirection: 'row',
+	  justifyContent: 'center',
+	  alignItems: 'center',
+	  paddingHorizontal: 8,
+	  paddingVertical: 8,
+	  alignSelf: 'stretch',
+	  backgroundColor: '#4CB748',
+	  marginTop: 16,
+	  minWidth: '50%',
+	},
+	btnText: {
+	  color: '#FFFFFF',
+	},
+ });

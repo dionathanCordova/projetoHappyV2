@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
+import { FancyAlert } from 'react-native-expo-fancy-alerts';
 
 interface ButtonProps {
     selected: boolean;
