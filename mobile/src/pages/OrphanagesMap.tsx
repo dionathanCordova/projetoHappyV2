@@ -7,6 +7,7 @@ import mapMarker from '../images/map-marker.png';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
 import api from '../services/api';
+import AsyncStorage from '@react-native-community/async-storage';
 
 interface OrphanageInterface {
 	id: number;
@@ -24,6 +25,7 @@ export default function OrphanagesMap() {
 		api.get('orphanages').then(response => {
 			setOrphanages(response.data);
 		});
+
 	}, [orphanages])
 
 	function handleNavigateToDetails(id: number) {
@@ -31,7 +33,13 @@ export default function OrphanagesMap() {
 	}
 
 	function handleNavigateToCreateOrphanage() {
-		navigations.navigate('InstructionCreate')
+		AsyncStorage.getItem('@Happy:user_id').then(response => {
+			if (response) {
+				navigations.navigate('InstructionCreate')
+			}else {
+				navigations.navigate('Sign')
+			}
+		});
 	}
 
 	return (

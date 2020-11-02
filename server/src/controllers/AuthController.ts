@@ -9,7 +9,7 @@ export default class AuthController {
          const authService = new CreateAuthService();
          const {user, token} = await authService.execute({email, password});
 
-         return response.json({user, token});
+         return response.json({user, token, status: 200});
 
       } catch (error) {
          return response.status(403).json({message2: error.message})

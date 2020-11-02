@@ -1,6 +1,10 @@
 import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
 
+interface ButtonProps {
+    selected: boolean;
+}
+
 export const Container = styled.ScrollView`
     flex: 1
 `;
@@ -57,6 +61,11 @@ export const ContentImage = styled.View`
     flexDirection: row;
     justify-content: space-between;
 `
+export const ContentButton = styled.View`
+    flex: 1;
+    flexDirection: row;
+    margin-top: -30px;
+`
 
 export const UploadedImage = styled.Image`
     width: 64px;
@@ -71,6 +80,7 @@ export const UploadedImage = styled.Image`
 export const RemoveButton = styled(RectButton)`
     margin-top: 46px;
     margin-right: 18px;
+    height: 40px;
 `
 export const ImageInput = styled.TouchableOpacity`
     background: rgba(255, 255, 255, 0.5);
@@ -89,6 +99,17 @@ export const Button = styled(RectButton)`
     align-items: center;
     height: 56px;
     margin-top: 32px;
+`
+
+export const ButtonNoBorder = styled(RectButton)<ButtonProps>`
+    background: ${props => props.selected ? '#EDFFF6' :  '#FFF'};
+    justify-content: center;
+    align-items: center;
+    height: 56px;
+    margin-top: 32px;
+`
+
+export const ButtonBorderRight = styled(RectButton)`
 `
 
 export const ButtonText = styled.Text`

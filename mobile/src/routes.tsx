@@ -14,60 +14,63 @@ import OrphanagesDetails from './pages/OrphanagesDetails';
 import InstructionCreate from './pages/IntructionCreate/instruction';
 
 import StepOne from './pages/CreateOrphanage/StepOne';
+import StepDois from './pages/CreateOrphanage/StepDois';
 import SelectMapPosition from './pages/CreateOrphanage/SelectMapPosition';
 import OrphanageData from './pages/CreateOrphanage/OrphanageData';
+
+import Sign from './pages/Sign/index';
 
 export default function Routes() {
     return (
         <NavigationContainer>
-            <Navigator screenOptions={{ 
+            <Navigator screenOptions={{
                 headerShown: false,
-                cardStyle: { backgroundColor: '#f2f3f5'}
+                cardStyle: { backgroundColor: '#f2f3f5' }
 
             }}>
-                 <Screen 
-                    name="onboarding" 
-                    component={SimpleOnboarding} 
+                <Screen
+                    name="onboarding"
+                    component={SimpleOnboarding}
                 />
-                
-                <Screen 
-                    name="OrphanagesMap" 
-                    component={OrphanagesMap} 
+
+                <Screen
+                    name="OrphanagesMap"
+                    component={OrphanagesMap}
                 />
-                
-                <Screen 
-                    name="OrphanagesDetails" 
+
+                <Screen
+                    name="OrphanagesDetails"
                     component={OrphanagesDetails}
                     options={{
                         headerShown: true,
-                        header: () => <Header showCancel={false} title="Orfanato"/>
-                    }} 
-                />
-                
-                <Screen 
-                    name="SelectMapPosition" 
-                    component={SelectMapPosition} 
-                    options={{
-                        headerShown: true,
-                        header: () => <Header title="Selecione no mapa"/>
-                    }} 
+                        header: () => <Header showCancel={false} title="Orfanato" />
+                    }}
                 />
 
-                <Screen 
-                    name="InstructionCreate" 
-                    component={InstructionCreate} 
+                <Screen
+                    name="SelectMapPosition"
+                    component={SelectMapPosition}
+                    options={{
+                        headerShown: true,
+                        header: () => <Header title="Selecione no mapa" />
+                    }}
+                />
+
+                <Screen
+                    name="InstructionCreate"
+                    component={InstructionCreate}
                     options={{
                         headerShown: false
-                    }} 
+                    }}
                 />
-                
-                <Screen 
-                    name="OrphanageData" 
+
+                <Screen
+                    name="OrphanageData"
                     component={OrphanageData}
                     options={{
                         headerShown: true,
-                        header: () => <Header title="Informe os dados"/>
-                    }} 
+                        header: () => <Header title="Informe os dados" />
+                    }}
                 />
 
                 <Screen
@@ -79,6 +82,22 @@ export default function Routes() {
                     }}
                 />
 
+                <Screen
+                    name="StepDois"
+                    component={StepDois}
+                    options={{
+                        headerShown: true,
+                        header: () => <Header title="Informe os dados" />
+                    }}
+                />
+
+                <Screen
+                    name="Sign"
+                    component={Sign}
+                    options={{
+                        headerShown: false,
+                    }}
+                />
             </Navigator>
         </NavigationContainer>
     )
