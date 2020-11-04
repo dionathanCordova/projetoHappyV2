@@ -37,7 +37,9 @@ export default function OrphanageDetails() {
 	useEffect(() => {
 		api.get(`orphanages/details/${params.id}`).then(response => {
 			setOrphanage(response.data);
+			console.log(response.data);
 		})
+
 	}, [params.id])
 
 	function handleOpenMapFromGoogleMaps() {

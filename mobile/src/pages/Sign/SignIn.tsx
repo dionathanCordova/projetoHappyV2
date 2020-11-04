@@ -56,7 +56,7 @@ export default function Signin() {
 				icon={
 					<View style={[styles.icon, { borderRadius: 32 }]}>
 						<Ionicons
-							name={'md-close' }
+							name={'md-close'}
 							size={36}
 							color="#FFFFFF"
 						/>
