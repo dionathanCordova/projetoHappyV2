@@ -51,7 +51,9 @@
 
 O Happy é uma aplicação que conecta pessoas à casas de acolhimento institucional para fazer o dia de muitas crianças mais feliz 💜
 
-<!-- ## :dart: About ##
+## :dart: Deploy ##
+
+https://projeto-happy-web.vercel.app/
 
 Describe your project -->
 
@@ -66,7 +68,7 @@ Describe your project -->
 :heavy_check_mark: Localização real do usuário\
 :heavy_check_mark: Cadastro em múltiplas etapas\
 :heavy_check_mark: Logout da aplicação\
-:x: Deploy da aplicação
+:heavy_check_mark: Deploy da aplicação
 
 ## 🚀 Tecnologias
 
